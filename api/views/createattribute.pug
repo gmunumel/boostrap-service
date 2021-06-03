@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1 Create Attribute 
+  form(action='/api/attribute', method='post')
+    input(type='text', name='name', placeholder='Name')
+    br
+    select(name='type')
+      option String
+      option Number 
+      option Object 
+      option Array 
+    br
+    input(type='text', name='parent', placeholder='Parent')
+    br
+
+    input(type='submit', value='Create Attribute')

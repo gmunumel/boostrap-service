@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1 Create Value 
+  form(action='/api/value', method='post')
+    input(type='text', name='name', placeholder='Name')
+    br
+    input(type='text', name='value', placeholder='Value')
+    br
+    input(type='text', name='parent', placeholder='Parent')
+    br
+
+    input(type='submit', value='Create Value')
