@@ -1,69 +1,43 @@
 import React, { Component } from 'react'
-import Attribute from '../presentation/Attribute'
+import { connect } from 'react-redux'
+import { CreateAttribute, Attribute } from '../presentation'
+import actions from '../../actions'
 import styles from './styles'
-import superagent from 'superagent'
 
 class Attributes extends Component {
   constructor() {
     super()
     this.state = {
-      attribute: {
-        name: '',
-        type: '',
-        parent: ''
-      },
-      list: [
-      ]
+      selected: 0
     }
   }
 
   componentDidMount() {
-    superagent
-      .get('http://localhost:9000/api/attribute')
-      .query(null)
-      .set('Accept', 'application/json')
-      .end((err, response) => {
-        if (err) {
-          alert('ERROR: ' + err)
-          return
-        }
+    if (this.props.attribute.all !== null)
+      return
 
-        let results = response.body.results
-        this.setState({
-          list: results
-        })
-      })
+    this.props.fetchAttributes(null)
   }
 
-  updateAttribute(event) {
-    let updatedAttribute = Object.assign({}, this.state.attribute)
-
-    if (event.target.id === 'attrName') {
-      updatedAttribute['name'] = event.target.value
-    } else if (event.target.id === 'attrParent') {
-      updatedAttribute['parent'] = event.target.value
-    } else {
-      updatedAttribute[event.target.id] = event.target.value
-    }
-
-    this.setState({
-      attribute: updatedAttribute
-    })
+  addAttribute(attribute) {
+    this.props.createAttribute(attribute)
   }
 
-  submitAttribute() {
-    let updatedList = Object.assign([], this.state.list)
-    updatedList.push(this.state.attribute)
-
+  selectAttribute(index) {
     this.setState({
-      list: updatedList
+      selected: index
     })
   }
 
   render() {
-    const listItems = this.state.list.map((attribute, i) => {
+    const attributes = this.props.attribute.all || []
+    const attributeList = attributes.map((attribute, i) => {
+      let selected = ( i === this.state.selected )
       return (
-        <div key={i}><Attribute currentAttribute={attribute}></Attribute></div>
+        <div key={i}>
+          <Attribute index={i} select={this.selectAttribute.bind(this)}
+            isSelected={selected} currentAttribute={attribute}></Attribute>
+        </div>
       )
     })
 
@@ -73,23 +47,28 @@ class Attributes extends Component {
       <div> 
         <h2>Attributes</h2>
         <div>
-          {listItems}
+          {attributeList}
         </div>
 
         <div style={style.attributesBox}>
-          <input id="attrName" onChange={this.updateAttribute.bind(this)} className="form-control" 
-            type="text" placeholder="Name" /><br />
-          <input id="type" onChange={this.updateAttribute.bind(this)} className="form-control" 
-            type="text" placeholder="Type" /><br />
-          <input id="attrParent" onChange={this.updateAttribute.bind(this)} className="form-control" 
-            type="text" placeholder="Parent" /><br />
-          <button className="btn btn-danger" onClick={this.submitAttribute.bind(this)}>
-            Submit Attribute
-          </button>
+          <CreateAttribute onCreate={this.addAttribute.bind(this)}></CreateAttribute>
         </div>
       </div>
     )
   }
 }
 
-export default Attributes
+const stateToProps = (state) => {
+  return {
+    attribute: state.attribute
+  }
+}
+
+const dispatchToProps = (dispath) => {
+  return {
+    fetchAttributes: (params) => dispath(actions.fetchAttributes(params)),
+    createAttribute: (attribute) => dispath(actions.createAttribute(attribute))
+  }
+}
+
+export default connect(stateToProps, dispatchToProps)(Attributes)

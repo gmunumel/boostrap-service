@@ -1,23 +1,37 @@
 import React, { Component } from 'react'
-import Value from '../presentation/Value'
+import { connect } from 'react-redux'
+import { CreateValue, Value } from '../presentation'
+import actions from '../../actions'
 import styles from './styles'
 
 class Values extends Component {
   constructor() {
     super()
     this.state = {
-      value: {
-        name: '',
-        value: '',
-        parent: ''
-      },
-      list: [
-        
-      ]
+      list: [ ]
     }
   }
 
+  componentDidMount() {
+    // APIManager.handleGet('http://localhost:9000/api/value', null, (err, response) => {
+    //   if (err) {
+    //     alert('ERROR: ' + err.message)
+    //     return
+    //   }
+
+    //   this.setState({
+    //     list: response.results
+    //   })
+    // })
+
+    if (this.props.value.all !== null)
+      return
+
+    this.props.fetchValues(null)
+  }
+
   updateValue(event) {
+    // TODO
     let updatedValue = Object.assign({}, this.state.value)
     updatedValue[event.target.id] = event.target.value
 
@@ -26,17 +40,26 @@ class Values extends Component {
     })
   }
 
-  submitValue() {
-    let updatedList = Object.assign([], this.state.list)
-    updatedList.push(this.state.value)
+  addValue(value) {
+    // let updatedValue = Object.assign({}, value)
+    // APIManager.handlePost('http://localhost:9000/api/value', updatedValue, (err, response) => {
+    //   if (err) {
+    //     alert('ERROR: ' + err.message)
+    //     return
+    //   }
 
-    this.setState({
-      list: updatedList
-    })
+    //   let updatedList = Object.assign([], this.state.list)
+    //   updatedList.push(response.result)
+    //   this.setState({
+    //     list: updatedList
+    //   })
+    // })
+    this.props.createValue(value)
   }
 
   render() {
-    const valueList = this.state.list.map((value, i) => {
+    const values = this.props.value.all || []
+    const valueList = values.map((value, i) => {
       return (
         <li key={i}><Value currentValue={value}></Value></li>
       )
@@ -46,25 +69,30 @@ class Values extends Component {
 
     return (
       <div style={style.container}>
-        <h2>Value: Attribute 1</h2>
+        <h2>Value(s) for: Attribute 1</h2>
         <div style={style.valuesBox}>
           <ul style={style.valuesList}>
             {valueList}
-          </ul>
+          </ul> 
 
-          <input id="name" onChange={this.updateValue.bind(this)} className="form-control" 
-            type="text" placeholder="Name" /><br />
-          <input id="value" onChange={this.updateValue.bind(this)} className="form-control" 
-            type="text" placeholder="Value" /><br />
-          <input id="parent" onChange={this.updateValue.bind(this)} className="form-control" 
-            type="text" placeholder="Parent" /><br />
-          <button className="btn btn-info" onClick={this.submitValue.bind(this)}>
-            Submit Value
-          </button>
+          <CreateValue onCreate={this.addValue.bind(this)}></CreateValue>
         </div>
       </div>
     )
   }
 }
 
-export default Values
+const stateToProps = (state) => {
+  return {
+    value: state.value
+  }
+}
+
+const dispatchToProps = (dispath) => {
+  return {
+    fetchValues: (params) => dispath(actions.fetchValues(params)),
+    createValue: (value) => dispath(actions.createValue(value))
+  }
+}
+
+export default connect(stateToProps, dispatchToProps)(Values)

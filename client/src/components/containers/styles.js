@@ -1,7 +1,7 @@
 const style = {
   value: {
     container: {
-      marginTop: 30
+      marginTop: 70
     },
     valuesBox: {
       padding: 12,
