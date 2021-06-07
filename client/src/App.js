@@ -6,11 +6,11 @@ import store from  './stores'
 class App extends React.Component {
   render() {
     return (
-      <div className="App">
-        <Provider store={ store.createStore() }>
-          <Home></Home>
-        </Provider>
-      </div>
+      <Provider store={ store.createStore() }>
+        <div className="App">
+            <Home></Home>
+        </div>
+      </Provider>
     );
   }
 }

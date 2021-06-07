@@ -6,6 +6,10 @@ This Rest API communicate with the client in React to handle the management of a
 
 `npm install`
 
+## Set up
+
+Open or create a `.env` file and fill the params accordingly your configuration
+
 ## Run the api
 
 `yarn start`

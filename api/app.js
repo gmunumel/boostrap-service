@@ -6,7 +6,15 @@ var logger = require('morgan');
 var cors = require('cors');
 var mongoose = require('mongoose');
 
-var dbUrl = 'mongodb://localhost/boostrap-api'
+var indexRouter = require('./routes/index');
+var apiRouter = require('./routes/api');
+
+var app = express();
+
+require('dotenv').config();
+
+// mongo config
+var dbUrl = process.env.MONGO_SERVER_URL + process.env.MONGO_NAME// 'mongodb://localhost/boostrap-api'
 mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, res) {
   if (err) {
     console.log('DB CONNECTION FAILED: ' + err)
@@ -14,11 +22,6 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true }, fun
     console.log('DB CONNECTION SUCCESS: ' + dbUrl)
   }
 })
-
-var indexRouter = require('./routes/index');
-var apiRouter = require('./routes/api');
-
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
