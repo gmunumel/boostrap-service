@@ -1,12 +1,13 @@
 import superagent from 'superagent'
 import Promise from 'bluebird'
+import { BASE_URL } from '../base'
 
 const apiManager = {
   
   handleGet: (url, params) => {
     return new Promise((resolve, reject) => {
       superagent
-      .get(url)
+      .get(BASE_URL + url)
       .query(params)
       .set('Accept', 'application/json')
       .end((err, response) => {
@@ -29,7 +30,7 @@ const apiManager = {
   handlePost: (url, body) => {
     return new Promise((resolve, reject) => {
       superagent
-      .post(url)
+      .post(BASE_URL + url)
       .send(body)
       .set('Accept', 'application/json')
       .end((err, response) => {

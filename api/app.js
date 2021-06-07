@@ -14,7 +14,7 @@ var app = express();
 require('dotenv').config();
 
 // mongo config
-var dbUrl = process.env.MONGO_SERVER_URL + process.env.MONGO_NAME// 'mongodb://localhost/boostrap-api'
+var dbUrl = process.env.MONGO_SERVER_URL + process.env.MONGO_NAME
 mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, res) {
   if (err) {
     console.log('DB CONNECTION FAILED: ' + err)

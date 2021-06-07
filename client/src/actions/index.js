@@ -77,51 +77,51 @@ const actions = {
   
   fetchAttributes: (params) => {
     return dispatch => {
-      return dispatch(getData('http://localhost:9000/api/attribute', params, constants.ATTRIBUTES_RECEIVED))
+      return dispatch(getData('/api/attribute', params, constants.ATTRIBUTES_RECEIVED))
     }
   },
   
   createAttribute: (params) => {
     return dispatch => {
-      return dispatch(postData('http://localhost:9000/api/attribute', params, constants.ATTRIBUTE_CREATED))
+      return dispatch(postData('/api/attribute', params, constants.ATTRIBUTE_CREATED))
     }
   },
 
   updateAttribute: (/*data*/params) => {
     return dispatch => {
-      //return dispatch(putData('http://localhost:9000/api/attribute', data, constants.ATTRIBUTE_UPDATED))
-      return dispatch(postData('http://localhost:9000/api/attribute/update', params, constants.ATTRIBUTE_UPDATED))
+      //return dispatch(putData('/api/attribute', data, constants.ATTRIBUTE_UPDATED))
+      return dispatch(postData('/api/attribute/update', params, constants.ATTRIBUTE_UPDATED))
     }
   },
 
   deleteAttribute: (/*data*/params) => {
     return dispatch => {
-      return dispatch(deleteData('http://localhost:9000/api/attribute/delete', params, constants.ATTRIBUTE_DELETED))
+      return dispatch(deleteData('/api/attribute/delete', params, constants.ATTRIBUTE_DELETED))
     }
   },
 
   fetchValues: (params) => {
     return dispatch => {
-      return dispatch(getData('http://localhost:9000/api/value', params, constants.VALUES_RECEIVED))
+      return dispatch(getData('/api/value', params, constants.VALUES_RECEIVED))
     }
   },
   
   createValue: (params) => {
     return dispatch => {
-      return dispatch(postData('http://localhost:9000/api/value', params, constants.VALUE_CREATED))
+      return dispatch(postData('/api/value', params, constants.VALUE_CREATED))
     }
   },
 
   updateValue: (/*data*/params) => {
     return dispatch => {
-      //return dispatch(putData('http://localhost:9000/api/value', data, constants.ATTRIBUTE_UPDATED))
-      return dispatch(postData('http://localhost:9000/api/value/update', params, constants.VALUE_UPDATED))
+      //return dispatch(putData('/api/value', data, constants.ATTRIBUTE_UPDATED))
+      return dispatch(postData('/api/value/update', params, constants.VALUE_UPDATED))
     }
   },
 
   deleteValue: (/*data*/params) => {
     return dispatch => {
-      return dispatch(deleteData('http://localhost:9000/api/value/delete', params, constants.VALUE_DELETED))
+      return dispatch(deleteData('/api/value/delete', params, constants.VALUE_DELETED))
     }
   }
 }

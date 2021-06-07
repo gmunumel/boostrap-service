@@ -6,6 +6,10 @@ This application handle the CRUD for attributes - values that will be use to gen
 
 `npm install`
 
+## Set up
+
+Open or create a `.env` file and fill the params accordingly your configuration
+
 ## Run the application
 
 `yarn start`
