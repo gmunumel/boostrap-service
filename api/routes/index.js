@@ -10,8 +10,4 @@ router.get('/createattribute', function(req, res, next) {
   res.render('createattribute', null);
 });
 
-router.get('/createvalue', function(req, res, next) {
-  res.render('createvalue', null);
-});
-
 module.exports = router;

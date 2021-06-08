@@ -7,22 +7,16 @@ class CreateAttribute extends Component {
       attribute: {
         name: '',
         type: '',
-        parent: ''
+        value: '',
+        parentId: ''
       },
       list: [ ]
     }
   }
 
-  updateAttribute(event) {
+  updateAttribute(event, field) {
     let updatedAttribute = Object.assign({}, this.state.attribute)
-
-    if (event.target.id === 'attrName') {
-      updatedAttribute['name'] = event.target.value
-    } else if (event.target.id === 'attrParent') {
-      updatedAttribute['parent'] = event.target.value
-    } else {
-      updatedAttribute[event.target.id] = event.target.value
-    }
+    updatedAttribute[field] = event.target.value
 
     this.setState({
       attribute: updatedAttribute,
@@ -35,7 +29,8 @@ class CreateAttribute extends Component {
       attribute: {
         name: '',
         type: '',
-        parent: ''
+        value: '',
+        parentId: ''
       }
     })
   }
@@ -43,13 +38,15 @@ class CreateAttribute extends Component {
   render() {
     return (
       <div>
-        <input id="attrName" onChange={this.updateAttribute.bind(this)} className="form-control" 
+        <input onChange={(event) => this.updateAttribute(event, 'name')} className="form-control" 
             type="text" placeholder="Name" value={this.state.attribute.name} /><br />
-          <input id="type" onChange={this.updateAttribute.bind(this)} className="form-control" 
+          <input onChange={(event) => this.updateAttribute(event, 'type')} className="form-control" 
             type="text" placeholder="Type" value={this.state.attribute.type} /><br />
-          <input id="attrParent" onChange={this.updateAttribute.bind(this)} className="form-control" 
-            type="text" placeholder="Parent" value={this.state.attribute.parent} /><br />
-          <button className="btn btn-danger" onClick={this.addAttribute.bind(this)}>
+          <input onChange={(event) => this.updateAttribute(event, 'value')} className="form-control" 
+            type="text" placeholder="Value" value={this.state.attribute.value} /><br />
+          <input onChange={(event) => this.updateAttribute(event, 'parentId')} className="form-control" 
+            type="text" placeholder="Parent" value={this.state.attribute.parentId} /><br />
+          <button className="btn btn-danger" onClick={(event) => this.addAttribute(event)}>
             Add Attribute
           </button>
       </div>

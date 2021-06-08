@@ -13,8 +13,9 @@ class Attributes extends Component {
   }
 
   componentDidMount() {
-    if (this.props.attribute.all !== null)
+    if (this.props.attribute.all !== null) {
       return
+    }
 
     this.props.fetchAttributes(null)
   }
@@ -23,10 +24,12 @@ class Attributes extends Component {
     this.props.createAttribute(attribute)
   }
 
-  selectAttribute(index) {
+  selectAttribute(index, attribute) {
     this.setState({
       selected: index
     })
+    this.props.setAttributeParams(attribute)
+    this.props.fetchAttributesBy({ parentId: attribute._id })
   }
 
   render() {
@@ -67,7 +70,9 @@ const stateToProps = (state) => {
 const dispatchToProps = (dispath) => {
   return {
     fetchAttributes: (params) => dispath(actions.fetchAttributes(params)),
-    createAttribute: (attribute) => dispath(actions.createAttribute(attribute))
+    createAttribute: (attribute) => dispath(actions.createAttribute(attribute)),
+    setAttributeParams: (params) => dispath(actions.setAttributeParams(params)),
+    fetchAttributesBy: (parentId) => dispath(actions.fetchAttributesBy(parentId))
   }
 }
 

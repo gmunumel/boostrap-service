@@ -5,7 +5,7 @@ class Attribute extends Component {
   
   onSelectTitle(event) {
     event.preventDefault()
-    this.props.select(this.props.index)
+    this.props.select(this.props.index, this.props.currentAttribute)
   }
 
   render() {
@@ -23,8 +23,10 @@ class Attribute extends Component {
           <h2 style={style.header} onClick={this.onSelectTitle.bind(this)}>
             {title}
           </h2>
+          <span className="detail">Id: {this.props.currentAttribute._id}</span><br />
           <span className="detail">Type: {this.props.currentAttribute.type}</span><br />
-          <span className="detail">Parent: {this.props.currentAttribute.parent}</span>
+          <span className="detail">Value: {this.props.currentAttribute.value}</span><br />
+          <span className="detail">Parent Id: {this.props.currentAttribute.parentId}</span>
       </div>
     )
   }

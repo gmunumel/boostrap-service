@@ -74,10 +74,16 @@ const deleteData = (path, actionType) => {
 }
 
 const actions = {
-  
+
   fetchAttributes: (params) => {
     return dispatch => {
       return dispatch(getData('/api/attribute', params, constants.ATTRIBUTES_RECEIVED))
+    }
+  },
+
+  fetchAttributesBy: (params) => {
+    return dispatch => {
+      return dispatch(getData('/api/attribute', params, constants.ATTRIBUTES_FILTERED))
     }
   },
   
@@ -100,30 +106,14 @@ const actions = {
     }
   },
 
-  fetchValues: (params) => {
+  setAttributeParams: (params) => {
     return dispatch => {
-      return dispatch(getData('/api/value', params, constants.VALUES_RECEIVED))
+      return dispatch({
+        type: constants.SET_ATTRIBUTE_PARAMS,
+        data: params
+      })
     }
   },
-  
-  createValue: (params) => {
-    return dispatch => {
-      return dispatch(postData('/api/value', params, constants.VALUE_CREATED))
-    }
-  },
-
-  updateValue: (/*data*/params) => {
-    return dispatch => {
-      //return dispatch(putData('/api/value', data, constants.ATTRIBUTE_UPDATED))
-      return dispatch(postData('/api/value/update', params, constants.VALUE_UPDATED))
-    }
-  },
-
-  deleteValue: (/*data*/params) => {
-    return dispatch => {
-      return dispatch(deleteData('/api/value/delete', params, constants.VALUE_DELETED))
-    }
-  }
 }
 
 export default actions
