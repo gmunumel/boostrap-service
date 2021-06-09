@@ -41,5 +41,8 @@
   },
   "engines": {
     "node": "12.18.3"
+  },
+  "devDependencies": {
+    "redux-immutable-state-invariant": "^2.1.0"
   }
 }
