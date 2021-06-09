@@ -20,11 +20,11 @@ class Attributes extends Component {
     this.props.fetchAttributes(null)
   }
 
-  addAttribute(attribute) {
+  addAttribute = (attribute) => {
     this.props.createAttribute(attribute)
   }
 
-  selectAttribute(index, attribute) {
+  selectAttribute = (index, attribute) => {
     this.setState({
       selected: index
     })
@@ -38,7 +38,7 @@ class Attributes extends Component {
       let selected = ( i === this.state.selected )
       return (
         <div key={i}>
-          <Attribute index={i} select={this.selectAttribute.bind(this)}
+          <Attribute index={i} select={this.selectAttribute}
             isSelected={selected} currentAttribute={attribute}></Attribute>
         </div>
       )
@@ -54,7 +54,7 @@ class Attributes extends Component {
         </div>
 
         <div style={style.attributesBox}>
-          <CreateAttribute onCreate={this.addAttribute.bind(this)}></CreateAttribute>
+          <CreateAttribute onCreate={this.addAttribute}></CreateAttribute>
         </div>
       </div>
     )

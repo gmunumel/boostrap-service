@@ -14,7 +14,7 @@ class CreateAttribute extends Component {
     }
   }
 
-  updateAttribute(event, field) {
+  updateAttribute = (event, field) => {
     let updatedAttribute = Object.assign({}, this.state.attribute)
     updatedAttribute[field] = event.target.value
 
@@ -23,7 +23,7 @@ class CreateAttribute extends Component {
     })
   }
 
-  addAttribute() {
+  addAttribute = () => {
     this.props.onCreate(this.state.attribute)
     this.setState({
       attribute: {
@@ -45,8 +45,8 @@ class CreateAttribute extends Component {
           <input onChange={(event) => this.updateAttribute(event, 'value')} className="form-control" 
             type="text" placeholder="Value" value={this.state.attribute.value} /><br />
           <input onChange={(event) => this.updateAttribute(event, 'parentId')} className="form-control" 
-            type="text" placeholder="Parent" value={this.state.attribute.parentId} /><br />
-          <button className="btn btn-danger" onClick={(event) => this.addAttribute(event)}>
+            type="text" placeholder="Parent Id" value={this.props.parentId} /><br />
+          <button className="btn btn-danger" onClick={this.addAttribute}>
             Add Attribute
           </button>
       </div>

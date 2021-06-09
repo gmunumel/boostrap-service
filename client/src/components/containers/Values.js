@@ -6,7 +6,7 @@ import styles from './styles'
 
 class Values extends Component {
  
-  addAttribute(attribute) {
+  addAttribute = (attribute) => {
     this.props.createAttribute(attribute)
   }
 
@@ -32,7 +32,7 @@ class Values extends Component {
             {valueList}
           </div>
           <br />
-          <CreateAttribute onCreate={(event) => this.addAttribute(event)}></CreateAttribute>
+          <CreateAttribute onCreate={this.addAttribute} parentId={this.props.value._id}></CreateAttribute>
         </div>
       </div>
     )

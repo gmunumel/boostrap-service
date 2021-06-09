@@ -3,7 +3,7 @@ import styles from './styles'
 
 class Attribute extends Component {
   
-  onSelectTitle(event) {
+  onSelectTitle = (event) => {
     event.preventDefault()
     this.props.select(this.props.index, this.props.currentAttribute)
   }
@@ -20,7 +20,7 @@ class Attribute extends Component {
 
     return (
       <div style={style.container}> 
-          <h2 style={style.header} onClick={this.onSelectTitle.bind(this)}>
+          <h2 style={style.header} onClick={this.onSelectTitle}>
             {title}
           </h2>
           <span className="detail">Id: {this.props.currentAttribute._id}</span><br />

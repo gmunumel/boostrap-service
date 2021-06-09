@@ -12,8 +12,8 @@ const attributeReducer = (state = initialState, action) => {
       newState['all'] = action.data
       return newState
     case (constants.ATTRIBUTE_CREATED):
-        newState.all.push(action.data)
-        return newState
+      newState.all.push(action.data)
+      return newState
     default: 
       return state
   }

@@ -16,9 +16,9 @@ const valueReducer = (state = initialState, action) => {
       newState['name'] = action.data.name
       newState['value'] = action.data.value
       return newState
-    case (constants.ATTRIBUTE_CREATED):
-        newState.all.push(action.data)
-        return newState
+    case (constants.VALUE_CREATED):
+      newState.all.push(action.data)
+      return newState
     case (constants.ATTRIBUTES_FILTERED):
       newState['all'] = action.data
       return newState
