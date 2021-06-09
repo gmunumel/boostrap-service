@@ -1,9 +1,9 @@
 import constants from '../constants'
 
 var initialState = {
-  _id: null,
-  name: null,
-  value: null,
+  _id: '',
+  name: '',
+  value: '',
   all: null
 }
 
