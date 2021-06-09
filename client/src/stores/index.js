@@ -4,6 +4,11 @@ import { attributeReducer, valueReducer } from '../reducers'
 
 let store = null
 
+// Be sure to ONLY add this middleware in development!
+const middleware = process.env.NODE_ENV !== 'production' ?
+  [require('redux-immutable-state-invariant').default(), thunk] :
+  [thunk];
+
 const reducer = {
   createStore: () => {
     const reducers = combineReducers({
@@ -13,7 +18,7 @@ const reducer = {
 
     store = createStore(
       reducers,
-      applyMiddleware(thunk)
+      applyMiddleware(...middleware)
     )
 
     return store
