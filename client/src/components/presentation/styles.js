@@ -17,20 +17,6 @@ const style = {
       textDecoration: 'none', color: 'red'
     }
   },
-  value: {
-    header: {
-      fontSize: 20,
-      fontWeight: 400
-    },
-    value: {
-      fontWeight: 200
-    },
-    divider: {
-      fontWeight: 200, 
-      marginLeft: 12, 
-      marginRight: 12
-    }
-  }
 }
 
 export default style

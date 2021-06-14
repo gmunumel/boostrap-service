@@ -17,6 +17,17 @@ const attributeReducer = (state = initialState, action) => {
       return { ...newState, 
         all: newState.all.filter(attribute => attribute._id !== action.data._id 
           && attribute.parentId !== action.data._id) }
+    case (constants.ATTRIBUTE_UPDATED):
+      const index = newState.all.findIndex(attribute => attribute._id === action.data._id)
+
+      const newArray = [ ...newState.all ]
+
+      newArray[index].name = action.data.name
+      newArray[index].type = action.data.type
+      newArray[index].value = action.data.value
+      newArray[index].parentId = action.data.parentId
+
+      return { ...newState, all: newArray }
     default: 
       return state
   }

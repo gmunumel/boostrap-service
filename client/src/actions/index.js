@@ -93,9 +93,9 @@ const actions = {
     }
   },
 
-  updateAttribute: (id, params) => {
+  updateAttribute: (params) => {
     return dispatch => {
-      return dispatch(postData('/api/attribute/' + id, params, constants.ATTRIBUTE_UPDATED))
+      return dispatch(postData('/api/attribute/' + params._id, params, constants.ATTRIBUTE_UPDATED))
     }
   },
 

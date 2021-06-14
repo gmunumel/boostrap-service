@@ -14,13 +14,18 @@ class Values extends Component {
     this.props.deleteAttribute(attributeId)
   }
 
+  updateAttribute = (attribute) => {
+    this.props.updateAttribute(attribute)
+  }
+
   render() {
     const values = this.props.value.all || []
     var valueList = values.map((value, i) => {
       return (
         <div key={i}>
           <Attribute currentAttribute={value}
-            onRemove={this.removeAttribute}>
+            onRemove={this.removeAttribute}
+            onUpdate={this.updateAttribute}>
           </Attribute>
         </div>
       )
@@ -59,6 +64,7 @@ const dispatchToProps = (dispath) => {
   return {
     createAttribute: (attribute) => dispath(actions.createAttribute(attribute)),
     deleteAttribute: (attributeId) => dispath(actions.deleteAttribute(attributeId)),
+    updateAttribute: (attribute) => dispath(actions.updateAttribute(attribute)),
   }
 }
 
