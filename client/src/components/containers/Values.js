@@ -10,11 +10,19 @@ class Values extends Component {
     this.props.createAttribute(attribute)
   }
 
+  removeAttribute = (attributeId) => {
+    this.props.deleteAttribute(attributeId)
+  }
+
   render() {
     const values = this.props.value.all || []
     var valueList = values.map((value, i) => {
       return (
-        <div key={i}><Attribute currentAttribute={value}></Attribute></div>
+        <div key={i}>
+          <Attribute currentAttribute={value}
+            onRemove={this.removeAttribute}>
+          </Attribute>
+        </div>
       )
     })
 
@@ -32,7 +40,9 @@ class Values extends Component {
             {valueList}
           </div>
           <br />
-          <CreateAttribute onCreate={this.addAttribute} parentId={this.props.value._id}></CreateAttribute>
+          <CreateAttribute onCreate={this.addAttribute} 
+            parentId={this.props.value._id}>
+          </CreateAttribute>
         </div>
       </div>
     )
@@ -47,7 +57,8 @@ const stateToProps = (state) => {
 
 const dispatchToProps = (dispath) => {
   return {
-    createAttribute: (attribute) => dispath(actions.createAttribute(attribute))
+    createAttribute: (attribute) => dispath(actions.createAttribute(attribute)),
+    deleteAttribute: (attributeId) => dispath(actions.deleteAttribute(attributeId)),
   }
 }
 

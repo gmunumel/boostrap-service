@@ -12,8 +12,11 @@ const attributeReducer = (state = initialState, action) => {
       newState['all'] = action.data
       return newState
     case (constants.ATTRIBUTE_CREATED):
-      newState.all.push(action.data)
-      return newState
+      return { ...newState, all: [ ...newState.all, action.data ] }
+    case (constants.ATTRIBUTE_DELETED):
+      return { ...newState, 
+        all: newState.all.filter(attribute => attribute._id !== action.data._id 
+          && attribute.parentId !== action.data._id) }
     default: 
       return state
   }

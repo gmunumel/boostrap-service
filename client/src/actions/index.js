@@ -55,7 +55,7 @@ const getData = (path, params, actionType) => {
 //     })
 // }
 
-const deleteData = (path, actionType) => {
+const deleteData = (path, params, actionType) => {
   return (dispatch) => APIManager
     .handleDelete(path)
     .then(response => {
@@ -93,16 +93,15 @@ const actions = {
     }
   },
 
-  updateAttribute: (/*data*/params) => {
+  updateAttribute: (id, params) => {
     return dispatch => {
-      //return dispatch(putData('/api/attribute', data, constants.ATTRIBUTE_UPDATED))
-      return dispatch(postData('/api/attribute/update', params, constants.ATTRIBUTE_UPDATED))
+      return dispatch(postData('/api/attribute/' + id, params, constants.ATTRIBUTE_UPDATED))
     }
   },
 
-  deleteAttribute: (/*data*/params) => {
+  deleteAttribute: (id) => {
     return dispatch => {
-      return dispatch(deleteData('/api/attribute/delete', params, constants.ATTRIBUTE_DELETED))
+      return dispatch(deleteData('/api/attribute/' + id, null, constants.ATTRIBUTE_DELETED))
     }
   },
 

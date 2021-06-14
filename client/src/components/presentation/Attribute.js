@@ -8,6 +8,10 @@ class Attribute extends Component {
     this.props.select(this.props.index, this.props.currentAttribute)
   }
 
+  removeAttribute = (event) => {
+    this.props.onRemove(event.target.value)
+  }
+
   render() {
     const style = styles.attribute
     const title = (this.props.isSelected) 
@@ -27,6 +31,12 @@ class Attribute extends Component {
           <span className="detail">Type: {this.props.currentAttribute.type}</span><br />
           <span className="detail">Value: {this.props.currentAttribute.value}</span><br />
           <span className="detail">Parent Id: {this.props.currentAttribute.parentId}</span>
+
+          <br/>
+          <button className="btn btn-danger" onClick={this.removeAttribute} 
+            value={this.props.currentAttribute._id}>
+            Delete
+          </button>
       </div>
     )
   }

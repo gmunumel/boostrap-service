@@ -54,8 +54,27 @@ const apiManager = {
 
   },
 
-  handleDelete: () => {
+  handleDelete: (url) => {
+    return new Promise((resolve, reject) => {
+      superagent
+      .del(BASE_URL + url)
+      //.send({ _id: id })
+      .set('Accept', 'application/json')
+      .end((err, response) => {
+        if (err) {
+          reject(err)
+          return
+        }
 
+        const confirmation = response.body.confirmation
+        if (confirmation !== 'success') {
+          reject(new Error(response.body.message))
+          return
+        }
+
+        resolve(response.body)
+      })
+    })
   }
 }
 

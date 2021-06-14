@@ -93,4 +93,64 @@ router.post('/:resource', function(req, res, next) {
   })
 })
 
+router.put('/:resource/:id', (req, res) => {
+	const resource = req.params.resource;
+	const controller = controllers[resource];
+
+	if (controller == null){
+		res.json({
+			confirmation: 'fail',
+			message: 'Invalid Resource Request: ' + resource
+		})
+
+		return;
+	}
+
+	controller.update(req.params.id, req.body, function(err, result) {
+    if (err) {
+      res.json({
+        confirmation: 'fail',
+        message: err
+      })
+
+      return;
+    }
+
+    res.json({
+      confirmation: 'success',
+      result: result
+    })
+  })
+})
+
+router.delete('/:resource/:id', (req, res) => {
+	const resource = req.params.resource;
+	const controller = controllers[resource];
+
+	if (controller == null){
+		res.json({
+			confirmation: 'fail',
+			message: 'Invalid Resource Request: ' + resource
+		})
+
+		return
+	}
+
+	controller.destroy(req.params.id, function(err, result) {
+    if (err) {
+      res.json({
+        confirmation: 'fail',
+        message: err
+      })
+
+      return;
+    }
+
+    res.json({
+      confirmation: 'success',
+      result: result
+    })
+  })
+})
+
 module.exports = router;

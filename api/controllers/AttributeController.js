@@ -47,13 +47,30 @@ module.exports = {
   },
 
   destroy: function(id, callback) {
-    Attribute.findByIdAndRemove(id, function(err) {
+    Attribute.findByIdAndRemove(id, function(err, attribute) {
       if (err) {
         callback(err, null);
         return;
       }
 
-      callback(null, null);
+      params = {parentId: id}
+      Attribute.find(params, function(err, attributes) {
+        if (err) {
+          callback(err, null);
+          return;
+        }
+
+        attributes.forEach(attr => {
+          Attribute.findByIdAndRemove(attr._id, function(err) {
+            if (err) {
+              callback(err, null);
+              return;
+            }
+          })
+        });
+      }) 
+
+      callback(null, attribute);
     })
   },
 }

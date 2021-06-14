@@ -24,6 +24,10 @@ class Attributes extends Component {
     this.props.createAttribute(attribute)
   }
 
+  removeAttribute = (attributeId) => {
+    this.props.deleteAttribute(attributeId)
+  }
+
   selectAttribute = (index, attribute) => {
     this.setState({
       selected: index
@@ -39,7 +43,9 @@ class Attributes extends Component {
       return (
         <div key={i}>
           <Attribute index={i} select={this.selectAttribute}
-            isSelected={selected} currentAttribute={attribute}></Attribute>
+            isSelected={selected} currentAttribute={attribute}
+            onRemove={this.removeAttribute}>
+          </Attribute>
         </div>
       )
     })
@@ -72,7 +78,8 @@ const dispatchToProps = (dispath) => {
     fetchAttributes: (params) => dispath(actions.fetchAttributes(params)),
     createAttribute: (attribute) => dispath(actions.createAttribute(attribute)),
     setAttributeParams: (params) => dispath(actions.setAttributeParams(params)),
-    fetchAttributesBy: (parentId) => dispath(actions.fetchAttributesBy(parentId))
+    fetchAttributesBy: (parentId) => dispath(actions.fetchAttributesBy(parentId)),
+    deleteAttribute: (attributeId) => dispath(actions.deleteAttribute(attributeId)),
   }
 }
 
