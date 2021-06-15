@@ -1,9 +1,5 @@
-import CreateAttribute from './CreateAttribute'
-import UpdateAttribute from './UpdateAttribute'
-import Attribute from './Attribute'
+import CreateAttribute from './CreateAttribute';
+import UpdateAttribute from './UpdateAttribute';
+import Attribute from './Attribute';
 
-export {
-  CreateAttribute,
-  UpdateAttribute, 
-  Attribute
-}
+export {CreateAttribute, UpdateAttribute, Attribute};

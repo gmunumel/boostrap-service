@@ -1,7 +1,5 @@
 const style = {
-  universal: {
+  universal: {},
+};
 
-  }
-}
-
-export default style
+export default style;

@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import Attributes from '../containers/Attributes'
-import Values from '../containers/Values'
+import React, {Component} from 'react';
+import Attributes from '../containers/Attributes';
+import Values from '../containers/Values';
 
 class Home extends Component {
   render() {
@@ -15,8 +15,8 @@ class Home extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Home
+export default Home;

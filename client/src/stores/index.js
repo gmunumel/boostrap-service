@@ -1,32 +1,30 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux'
-import thunk from 'redux-thunk'
-import { attributeReducer, valueReducer } from '../reducers'
+import {createStore, applyMiddleware, combineReducers} from 'redux';
+import thunk from 'redux-thunk';
+import {attributeReducer, valueReducer} from '../reducers';
 
-let store = null
+let store = null;
 
 // Be sure to ONLY add this middleware in development!
-const middleware = process.env.NODE_ENV !== 'production' ?
-  [require('redux-immutable-state-invariant').default(), thunk] :
-  [thunk];
+const middleware =
+  process.env.NODE_ENV !== 'production' ?
+    [require('redux-immutable-state-invariant').default(), thunk] :
+    [thunk];
 
 const reducer = {
   createStore: () => {
     const reducers = combineReducers({
       attribute: attributeReducer,
-      value: valueReducer
-    })
+      value: valueReducer,
+    });
 
-    store = createStore(
-      reducers,
-      applyMiddleware(...middleware)
-    )
+    store = createStore(reducers, applyMiddleware(...middleware));
 
-    return store
+    return store;
   },
 
   currentStore: () => {
-    return store
-  }
-}
+    return store;
+  },
+};
 
-export default reducer
+export default reducer;
